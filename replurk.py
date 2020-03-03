@@ -14,7 +14,6 @@ def search_plurk(config, secret):
         response = client.request(url, method='GET')
         found_posts = json.loads(response[1].decode("utf-8"))
         plurks += found_posts['plurks']
-    print(plurks)
     return plurks
 
 
@@ -41,18 +40,28 @@ def replurk_post(ids, secret):
     response = client.request(url, method='GET')
 
 
-def replurk_pc_gatch_posts():
-    import pc_gacha_config, pc_gacha_secret
-    candidates = search_plurk(pc_gacha_config, pc_gacha_secret)
+def search_and_replurk_posts(config, secret):
+    candidates = search_plurk(config, secret)
     plurk_ids = []
     for candidate in candidates:
-        if not valid_to_replurk(candidate, pc_gacha_config): continue
+        if not valid_to_replurk(candidate, config): continue
         if candidate['replurked']: break
         plurk_ids.append(candidate['plurk_id'])
 
-    replurk_post(plurk_ids)
+    replurk_post(plurk_ids, secret)
     return plurk_ids
+
+
+def replurk_pc_gatch_posts():
+    import pc_gacha_config, pc_gacha_secret
+    search_and_replurk_posts(pc_gacha_config, pc_gacha_secret)
+
+
+def replurk_appraisal_posts():
+    import appraisal_config, appraisal_secret
+    search_and_replurk_posts(appraisal_config, appraisal_secret)
 
 
 if __name__ == '__main__':
     replurk_pc_gatch_posts()
+    replurk_appraisal_posts()
