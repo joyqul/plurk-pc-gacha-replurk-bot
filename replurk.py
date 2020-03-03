@@ -15,6 +15,7 @@ def search_pc_gatcha():
 def valid_to_replurk(post):
     if post['user_id']!=ANONYMOUS_ID: return False
     if post['content'].find("#噗幣轉蛋")<0: return False
+    if post['content'].find("#勿轉")>0: return False
     return True
 
 
