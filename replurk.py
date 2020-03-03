@@ -25,16 +25,18 @@ def replurk_post(ids):
     response = client.request(url, method='GET')
 
 
-def find_candidate_posts():
+def replurk_pc_gatch_posts():
     plurk_posts = search_pc_gatcha()
     candidates = plurk_posts['plurks']
     plurk_ids = []
     for candidate in candidates:
         if not valid_to_replurk(candidate): continue
-        plurk_ids.append(candidate['plurk_id'])
         if candidate['replurked']: break
+        plurk_ids.append(candidate['plurk_id'])
+
     replurk_post(plurk_ids)
+    return plurk_ids
 
 
 if __name__ == '__main__':
-    find_candidate_posts()
+    replurk_pc_gatch_posts()
