@@ -1,14 +1,12 @@
 import oauth2 as oauth
 import urllib.parse as urlparse
 import json
-import config
+import config, util
 
 ANONYMOUS_ID = 99999
 
 def search_pc_gatcha():
-    consumer = oauth.Consumer(config.APP_KEY, config.APP_SEC)
-    token = oauth.Token(config.OAUTH_TOKEN, config.OAUTH_TOKEN_SECRET)
-    client = oauth.Client(consumer, token)
+    client = util.get_authenticated_client()
     url = 'https://www.plurk.com/APP/PlurkSearch/search?query=噗幣轉蛋'
     response = client.request(url, method='GET')
     return json.loads(response[1].decode("utf-8"))
@@ -21,13 +19,10 @@ def valid_to_replurk(post):
 
 
 def replurk_post(ids):
-    consumer = oauth.Consumer(config.APP_KEY, config.APP_SEC)
-    token = oauth.Token(config.OAUTH_TOKEN, config.OAUTH_TOKEN_SECRET)
-    client = oauth.Client(consumer, token)
+    client = util.get_authenticated_client()
     ids = json.dumps(ids)
     url = 'https://www.plurk.com/APP/Timeline/replurk?ids='+ids
     response = client.request(url, method='GET')
-    print(response)
 
 
 def find_candidate_posts():
@@ -40,4 +35,6 @@ def find_candidate_posts():
         if candidate['replurked']: break
     replurk_post(plurk_ids)
 
-find_candidate_posts()
+
+if __name__ == '__main__':
+    find_candidate_posts()

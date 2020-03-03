@@ -6,11 +6,13 @@ import config
 OAUTH_REQUEST_TOKEN = 'https://www.plurk.com/OAuth/request_token'
 OAUTH_ACCESS_TOKEN = 'https://www.plurk.com/OAuth/access_token'
 
+
 def get_request_token(app_key, app_secret):
     consumer = oauth.Consumer(app_key, app_secret)
     client = oauth.Client(consumer)
     response = client.request(OAUTH_REQUEST_TOKEN, method='GET')
     return urlparse.parse_qs(response[1])
+
 
 def get_access_token(app_key, app_secret, oauth_token, oauth_token_secret, oauth_verifier):
     consumer = oauth.Consumer(app_key, app_secret)
