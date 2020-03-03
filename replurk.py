@@ -20,10 +20,24 @@ def valid_to_replurk(post):
     return True
 
 
+def replurk_post(ids):
+    consumer = oauth.Consumer(config.APP_KEY, config.APP_SEC)
+    token = oauth.Token(config.OAUTH_TOKEN, config.OAUTH_TOKEN_SECRET)
+    client = oauth.Client(consumer, token)
+    ids = json.dumps(ids)
+    url = 'https://www.plurk.com/APP/Timeline/replurk?ids='+ids
+    response = client.request(url, method='GET')
+    print(response)
+
+
 def find_candidate_posts():
     plurk_posts = search_pc_gatcha()
     candidates = plurk_posts['plurks']
+    plurk_ids = []
     for candidate in candidates:
         if not valid_to_replurk(candidate): continue
-        #print(candidate)
+        plurk_ids.append(candidate['plurk_id'])
         if candidate['replurked']: break
+    replurk_post(plurk_ids)
+
+find_candidate_posts()
