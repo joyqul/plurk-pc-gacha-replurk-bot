@@ -1,3 +1,4 @@
-config.py
+pc_gacha_secret.py
+appraisal_secret.py
 *.swp
 __pycache__/*
