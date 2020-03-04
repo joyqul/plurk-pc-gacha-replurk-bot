@@ -15,14 +15,14 @@ def valid_to_replurk(post, config):
 
 
 def get_candidates_posts(config, secret):
-    posted_time_limit = datetime.datetime.utcnow()-datetime.timedelta(minutes=2*config.INTERVAL_MINUTES)
+    posted_time_limit = datetime.datetime.utcnow()-datetime.timedelta(minutes=config.INTERVAL_MINUTES)
 
     posts = replurk.search_plurk(config, secret)
     candidates = []
     for post in posts:
         if not replurk.valid_to_replurk(post, config): continue
         posted_time = datetime.datetime.strptime(post['posted'], '%a, %d %b %Y %H:%M:%S %Z')
-        if posted_time_limit+datetime.timedelta(minutes=config.INTERVAL_MINUTES)<posted_time<posted_time_limit: continue
+        if posted_time<posted_time_limit: continue
         candidates.append(post)
     return candidates
 
