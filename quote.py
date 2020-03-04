@@ -15,7 +15,7 @@ def valid_to_replurk(post, config):
 
 
 def get_candidates_posts(config, secret):
-    posted_time_limit = datetime.datetime.utcnow()-datetime.timedelta(hours=3)
+    posted_time_limit = datetime.datetime.utcnow()-datetime.timedelta(minutes=config.INTERVAL_MINUTES)
 
     posts = replurk.search_plurk(config, secret)
     candidates = []
@@ -60,7 +60,8 @@ def quote_post(post, secret):
     print(response)
 
     
-def quote_pc_gatch_plurk(config, secret):
+def quote_pc_gatch_plurk():
+    import ura_pc_gacha_config as config, ura_pc_gacha_secret as secret
     posts = get_candidates_posts(config, secret)
     posts.reverse()
     for post in posts:
@@ -68,5 +69,4 @@ def quote_pc_gatch_plurk(config, secret):
         
 
 if __name__ == '__main__':
-    import ura_pc_gacha_config, ura_pc_gacha_secret
-    quote_pc_gatch_plurk(ura_pc_gacha_config, ura_pc_gacha_secret)
+    quote_pc_gatch_plurk()

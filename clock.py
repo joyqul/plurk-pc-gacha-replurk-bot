@@ -1,11 +1,17 @@
-import replurk
+import replurk, quote, ura_pc_gacha_config
 from apscheduler.schedulers.blocking import BlockingScheduler
 
 sched = BlockingScheduler()
 
 @sched.scheduled_job('interval', seconds=10)
 def timed_job():
-    replurk.replurk_pc_gatch_posts()
+    pass
+    ## temporary closed
+    #replurk.replurk_pc_gatch_posts()
+
+@sched.scheduled_job('interval', minutes=ura_pc_gacha_config.INTERVAL_MINUTES)
+def timed_job():
+    quote.quote_pc_gatch_plurk()
 
 @sched.scheduled_job('interval', minutes=30)
 def timed_job():
