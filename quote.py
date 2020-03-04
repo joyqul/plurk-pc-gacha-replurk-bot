@@ -39,7 +39,7 @@ def base36encode(number):
         number, i = divmod(number, 36)
         base36 = alphabet[i] + base36
 
-    return base36 or alphabet[0]
+    return (base36 or alphabet[0]).lower()
 
 
 def quote_post(post, secret):
@@ -53,11 +53,10 @@ def quote_post(post, secret):
         content += '**可能為親友粉絲限定**'
     else:
         content += '**偷偷說公開河道 only**'
-    content += '\n' +full_plurk_url
+    content += '\n' + full_plurk_url
     params = urllib.parse.urlencode({'content': content, 'qualifier': 'says'})
     url = url+params
     response = client.request(url, method='GET')
-    print(response)
 
     
 def quote_pc_gatch_plurk():
