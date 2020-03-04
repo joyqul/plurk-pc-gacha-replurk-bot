@@ -48,12 +48,13 @@ def quote_post(post, secret):
     plurk_url_id = base36encode(post['plurk_id'])
     full_plurk_url = 'https://www.plurk.com/p/'+plurk_url_id
 
-    content = 'plurk_id: '+plurk_url_id+'\n'
+    content = ''
     if post['publish_to_followers']:
         content += '**可能為親友粉絲限定**'
     else:
         content += '**偷偷說公開河道 only**'
-    content += '\n' + full_plurk_url
+    content +='\n'+post['content_raw']
+    content += '\n'+full_plurk_url
     params = urllib.parse.urlencode({'content': content, 'qualifier': 'says'})
     url = url+params
     response = client.request(url, method='GET')
