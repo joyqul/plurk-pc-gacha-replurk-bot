@@ -1,5 +1,3 @@
-import oauth2 as oauth
-import urllib.parse as urlparse
 import json
 import util
 

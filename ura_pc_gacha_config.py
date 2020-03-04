@@ -1,0 +1,3 @@
+SKIP_TAGS = []
+MUST_HAVE_AT_LEAST_ONE = ["#噗幣轉蛋"]
+SEARCH_KEYWORDS = ["噗幣轉蛋"]
