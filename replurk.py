@@ -35,6 +35,10 @@ class ReplurkBot():
         return ReplurkBot.contain_tag(post, self.config.MUST_HAVE_AT_LEAST_ONE)
 
 
+    def contain_must_replurk_tag(self, post):
+        return ReplurkBot.contain_tag(post, self.config.MUST_REPLURK_TAGS)
+
+
     def contain_skip_tag(self, post):
         return ReplurkBot.contain_tag(post, self.config.SKIP_TAGS)
 
@@ -42,6 +46,7 @@ class ReplurkBot():
     def valid_to_replurk(self, post):
         if post['user_id']!=ANONYMOUS_ID: return False
         if post['publish_to_followers']: return False
+        if self.contain_must_replurk_tag(post): return True
         if not self.contain_must_have_tag(post): return False
         if self.contain_skip_tag(post): return False
         return True
@@ -77,4 +82,5 @@ def replurk_appraisal_posts():
 
 
 if __name__ == '__main__':
+    replurk_pc_gatch_posts()
     replurk_appraisal_posts()
