@@ -6,9 +6,7 @@ sched = BlockingScheduler()
 
 @sched.scheduled_job('interval', seconds=10)
 def timed_job():
-    pass
-    ## temporary closed
-    #replurk.replurk_pc_gatch_posts()
+    replurk.replurk_pc_gatch_posts()
 
 
 @sched.scheduled_job('interval', minutes=ura_pc_gacha_config.INTERVAL_MINUTES)
