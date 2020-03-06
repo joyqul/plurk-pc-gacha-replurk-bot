@@ -26,7 +26,7 @@ class ReplurkBot():
 
     def contain_tag(post, tags):
         for tag in tags:
-            if post['content'].find(tag)>=0:
+            if post['content'].lower().find(tag)>=0:
                 return True
         return False
 
