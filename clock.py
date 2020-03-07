@@ -14,7 +14,7 @@ def timed_job():
     replurk.replurk_appraisal_posts()
 
 
-@sched.scheduled_job('interval', minutes=30)
+@sched.scheduled_job('interval', minutes=10)
 def timed_job():
     replurk_bl_works.replurk_bl_works()
     
