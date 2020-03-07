@@ -63,8 +63,8 @@ class ReplurkBot():
         candidates = self.search_plurk()
         plurk_ids = []
         for candidate in candidates:
-            if not self.valid_to_replurk(candidate): continue
             if candidate['replurked']: continue
+            if not self.valid_to_replurk(candidate): continue
             plurk_ids.append(candidate['plurk_id'])
         return self.replurk_post(plurk_ids)
 
