@@ -7,6 +7,7 @@ sched = BlockingScheduler()
 @sched.scheduled_job('interval', seconds=10)
 def timed_job():
     replurk.replurk_pc_gatch_posts()
+    replurk.replurk_avalon_group_posts()
 
 
 @sched.scheduled_job('interval', minutes=30)
