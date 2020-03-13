@@ -81,6 +81,11 @@ def replurk_appraisal_posts():
     bot.search_and_replurk_posts()
 
 
+def replurk_avalon_group_posts():
+    import avalon_group_config, avalon_group_secret
+    bot = ReplurkBot(avalon_group_config, avalon_group_secret)
+    bot.search_and_replurk_posts()
+
+
 if __name__ == '__main__':
-    replurk_pc_gatch_posts()
-    replurk_appraisal_posts()
+    replurk_avalon_group_posts()
