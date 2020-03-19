@@ -45,7 +45,6 @@ class ReplurkBot():
 
     def valid_to_replurk(self, post):
         if post['user_id']!=ANONYMOUS_ID: return False
-        if post['publish_to_followers']: return False
         if self.contain_must_replurk_tag(post): return True
         if not self.contain_must_have_tag(post): return False
         if self.contain_skip_tag(post): return False

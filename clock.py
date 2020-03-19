@@ -4,9 +4,8 @@ from apscheduler.schedulers.blocking import BlockingScheduler
 
 sched = BlockingScheduler()
 
-@sched.scheduled_job('interval', seconds=10)
+@sched.scheduled_job('interval', minutes=1)
 def timed_job():
-    replurk.replurk_pc_gatch_posts()
     replurk.replurk_avalon_group_posts()
 
 
