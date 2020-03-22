@@ -1,4 +1,4 @@
-import json
+import json, urllib
 import util
 
 
@@ -58,14 +58,24 @@ class ReplurkBot():
         return response
 
 
-    def search_and_replurk_posts(self):
+    def search_and_replurk_posts(self, auto_comment_content=None):
         candidates = self.search_plurk()
         plurk_ids = []
         for candidate in candidates:
             if candidate['replurked']: continue
             if not self.valid_to_replurk(candidate): continue
-            plurk_ids.append(candidate['plurk_id'])
+            plurk_id = candidate['plurk_id']
+            plurk_ids.append(plurk_id)
+            if auto_comment_content:
+                self.add_response(plurk_id, auto_comment_content)
         return self.replurk_post(plurk_ids)
+
+    def add_response(self, plurk_id, content):
+        url = '%s/APP/Responses/responseAdd?' %(ROOT_URL)
+        params = urllib.parse.urlencode({'plurk_id': plurk_id, 'content': content, 'qualifier': 'says'})
+        url = url+params
+        response = self.client.request(url, method='GET')
+        return response
 
 
 def replurk_pc_gatch_posts():
@@ -83,7 +93,8 @@ def replurk_appraisal_posts():
 def replurk_avalon_group_posts():
     import avalon_group_config, avalon_group_secret
     bot = ReplurkBot(avalon_group_config, avalon_group_secret)
-    bot.search_and_replurk_posts()
+    auto_comment_content = "[阿瓦隆機器人] 新功能測試！線上平台連結：http://avalon.signage-cloud.org/"
+    bot.search_and_replurk_posts(auto_comment_content=auto_comment_content)
 
 
 if __name__ == '__main__':
