@@ -77,11 +77,32 @@ class ReplurkBot():
         response = self.client.request(url, method='GET')
         return response
 
+    def like_post(self, ids):
+        ids = json.dumps(ids)
+        url = '%s/APP/Timeline/favoritePlurks?ids=%s' %(ROOT_URL, ids)
+        response = self.client.request(url, method='GET')
+        return response
+
+    def search_and_like_posts(self):
+        candidates = self.search_plurk()
+        plurk_ids = []
+        for candidate in candidates:
+            if not self.valid_to_replurk(candidate): continue
+            plurk_id = candidate['plurk_id']
+            plurk_ids.append(plurk_id)
+        return self.like_post(plurk_ids)
+
 
 def replurk_pc_gatch_posts():
     import pc_gacha_config, pc_gacha_secret
     bot = ReplurkBot(pc_gacha_config, pc_gacha_secret)
     bot.search_and_replurk_posts()
+
+
+def like_pc_gatch_posts():
+    import pc_gacha_config, pc_gacha_secret
+    bot = ReplurkBot(pc_gacha_config, pc_gacha_secret)
+    bot.search_and_like_posts()
 
 
 def replurk_appraisal_posts():
@@ -98,4 +119,4 @@ def replurk_avalon_group_posts():
 
 
 if __name__ == '__main__':
-    replurk_avalon_group_posts()
+    like_pc_gatch_posts()
