@@ -88,6 +88,7 @@ class ReplurkBot():
         plurk_ids = []
         for candidate in candidates:
             if not self.valid_to_replurk(candidate): continue
+            if candidate['favorite']: continue
             plurk_id = candidate['plurk_id']
             plurk_ids.append(plurk_id)
         return self.like_post(plurk_ids)
