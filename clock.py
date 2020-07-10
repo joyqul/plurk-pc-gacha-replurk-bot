@@ -18,6 +18,7 @@ def timed_job():
 @sched.scheduled_job('interval', minutes=10)
 def timed_job():
     replurk_bl_works.replurk_bl_works()
+    replurk.replurk_commission_posts()
     
 
 sched.start()

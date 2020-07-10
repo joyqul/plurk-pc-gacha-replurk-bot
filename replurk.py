@@ -115,8 +115,7 @@ def replurk_appraisal_posts():
 def replurk_avalon_group_posts():
     import avalon_group_config, avalon_group_secret
     bot = ReplurkBot(avalon_group_config, avalon_group_secret)
-    auto_comment_content = "[阿瓦隆機器人] 新功能測試！線上平台連結：http://avalon.signage-cloud.org/"
-    bot.search_and_replurk_posts(auto_comment_content=auto_comment_content)
+    bot.search_and_replurk_posts()
 
 def replurk_commission_posts():
     import commission_config, commission_secret
@@ -124,4 +123,4 @@ def replurk_commission_posts():
     bot.search_and_replurk_posts()
 
 if __name__ == '__main__':
-    replurk_commission_posts()
+    replurk_avalon_group_posts()
