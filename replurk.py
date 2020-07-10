@@ -118,6 +118,10 @@ def replurk_avalon_group_posts():
     auto_comment_content = "[阿瓦隆機器人] 新功能測試！線上平台連結：http://avalon.signage-cloud.org/"
     bot.search_and_replurk_posts(auto_comment_content=auto_comment_content)
 
+def replurk_commission_posts():
+    import commission_config, commission_secret
+    bot = ReplurkBot(commission_config, commission_secret)
+    bot.search_and_replurk_posts()
 
 if __name__ == '__main__':
-    like_pc_gatch_posts()
+    replurk_commission_posts()

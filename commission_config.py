@@ -1,0 +1,4 @@
+SKIP_TAGS = []
+MUST_REPLURK_TAGS = []
+MUST_HAVE_AT_LEAST_ONE = ["#徵委託"]
+SEARCH_KEYWORDS = ["徵委託"]
