@@ -11,6 +11,10 @@ class ReplurkBot():
         self.config = config
         self.secret = secret
         self.client = util.get_authenticated_client(secret)
+        try:
+            self.replurk_normal_post = config.replurk_normal_post
+        except:
+            self.replurk_normal_post = False
 
 
     def search_plurk(self):
@@ -44,7 +48,7 @@ class ReplurkBot():
 
 
     def valid_to_replurk(self, post):
-        if post['user_id']!=ANONYMOUS_ID: return False
+        if not self.replurk_normal_post and post['user_id']!=ANONYMOUS_ID: return False
         if self.contain_must_replurk_tag(post): return True
         if not self.contain_must_have_tag(post): return False
         if self.contain_skip_tag(post): return False
@@ -123,4 +127,4 @@ def replurk_commission_posts():
     bot.search_and_replurk_posts()
 
 if __name__ == '__main__':
-    replurk_avalon_group_posts()
+    replurk_commission_posts()
